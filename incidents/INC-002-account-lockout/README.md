@@ -1,6 +1,5 @@
 # INC-002 — Account locked after failed sign-ins
 
-**Date:** 12 October 2026  
 **Environment:** Windows Server 2025 (AD DS/DNS), Windows 11, VMware Host-only network  
 **Account:** `HAPPYSYSTEM\INC002-TestUser`  
 **Type:** Simulated helpdesk ticket — home lab
