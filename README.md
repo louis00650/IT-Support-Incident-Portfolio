@@ -2,7 +2,7 @@
 
 I use a VMware home lab to practise everyday Windows and helpdesk issues: reproducing a problem, checking the likely causes, making a targeted fix, and testing again as the affected user.
 
-The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined Windows 11 client on a Host-only virtual network. I keep the infrastructure build in my separate [Active Directory lab repository](https://github.com/louis00650/ActiveDirectory-Lab-ITSupport).
+The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined Windows 11 client on a Host-only virtual network. 
 
 ## Incident notes
 
