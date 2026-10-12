@@ -1,6 +1,5 @@
 # INC-003 — Password change required at sign-in
 
-**Date:** 12 October 2026  
 **Environment:** Windows Server 2025 (AD DS/DNS), domain-joined Windows 11 VM, VMware Host-only network  
 **Account:** `HAPPYSYSTEM\INC003-TestUser`  
 **Type:** Simulated helpdesk ticket — home lab
