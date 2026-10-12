@@ -1,6 +1,5 @@
 # INC-001 — Domain sign-in denied
 
-**Date:** 12 October 2026  
 **Environment:** Windows Server 2025 (AD DS/DNS), Windows 11, VMware Host-only network  
 **Account:** `HAPPYSYSTEM\INC001-TestUser`  
 **Type:** Simulated helpdesk ticket — home lab
