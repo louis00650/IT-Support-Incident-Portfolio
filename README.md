@@ -11,7 +11,7 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-001](incidents/INC-001-disabled-account/README.md) | Domain sign-in denied | DC discovery, LDAP connectivity, AD account state, Kerberos | Resolved |
 | [INC-002](incidents/INC-002-account-lockout/README.md) | Account locked after failed sign-ins | Fine-Grained Password Policy, Event 4740, AD account unlock, Kerberos | Resolved |
 | [INC-003](incidents/INC-003-password-change/README.md) | Password change required at sign-in | AD password reset, pwdLastSet, password policy, Kerberos | Resolved |
-
+| [INC-004](incidents/INC-004-department-transfer/README.md) | Department transfer — access denied | AD Groups, SMB, NTFS, Security Tokens | Resolved |
 
 Each case includes the actual commands and screenshots from the lab. I'll add new cases as I finish and verify them.
 
