@@ -14,6 +14,8 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-004](incidents/INC-004-department-transfer/README.md) | Department transfer — access denied | AD Groups, SMB, NTFS, Security Tokens | Resolved |
 | [INC-005](incidents/INC-005-temporary-windows-profile/README.md) | Temporary Windows profile after sign-in | User Profile Service, NTUSER.DAT, Event Viewer | Resolved |
 | [INC-006](incidents/INC-006-wrong-account-context/README.md) | Wrong Account Context — Local vs Domain Sign-in | Local SAM, Active Directory, authentication context, SIDs | **Verified** |
+| [INC-007](incidents/INC-007-hr-share-access-denied/README.md) | Access Denied to HR Shared Folder | AD Groups, SMB Share Permissions, NTFS ACLs | **Verified** |
+
 
 Each case includes the actual commands and screenshots from the lab. I'll add new cases as I finish and verify them.
 
