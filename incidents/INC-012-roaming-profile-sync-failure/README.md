@@ -6,47 +6,54 @@
 
 ## User report
 
-> "The files I added to my desktop on one PC are missing when I sign in to another PC."
+> "The desktop file I added on my first PC is missing when I sign in to my second PC."
 
 ## Lab environment
 
 - Domain: `HappySystem.local`
-- Domain controller and roaming-profile file server: Windows Server 2025 (`WIN-9E9JIE0QIB8`, `192.168.146.10`)
+- Domain controller and profile file server: Windows Server 2025 (`WIN-9E9JIE0QIB8`, `192.168.146.10`)
 - Client A: Windows 11 (`DESKTOP-940C9FF`)
 - Client B: Windows 11 (`INC012-PC02`)
-- Test account: `HAPPYSYSTEM\INC012-RoamingUser`
-- Roaming profile share: `\\WIN-9E9JIE0QIB8\RProfile$`
-- Roaming profile: `INC012-RoamingUser.V6`
-- Group Policy: `Roaming Profiles` (computer-side profile path)
+- Test user: `HAPPYSYSTEM\INC012-RoamingUser`
+- Profile share: `\\WIN-9E9JIE0QIB8\RProfile$`
+- Configuration: computer-side `Roaming Profiles` GPO
 
-## Troubleshooting
+## Baseline and reported problem
 
-I confirmed that the test account could roam between the two workstations. On Client A, I created `INC012-UpdatedMarker.txt` on the desktop and signed out. I verified that the new file reached the server's roaming-profile Desktop folder. Client B had previously cached the older profile, which contained only `INC012-ProfileMarker.txt`.
+I first verified that a desktop marker could roam successfully from Client A to Client B. I then signed out of Client B, returned to Client A, and created a second file, `INC012-UpdatedMarker.txt`, with the text `INC012 Updated Profile From Client A`.
 
-For this test, I enabled a temporary outbound Windows Firewall rule on Client B to block TCP 445 to `192.168.146.10`. After signing in on Client B, the original desktop marker was still available but the updated marker was missing. The command prompt returned **The system cannot find the file specified** when I tried to read it.
+![Updated desktop marker created and read on Client A](../../screenshots/INC-012/01-client-a-updated-marker.png)
 
-![Client B shows the original marker but cannot find the updated desktop file](../../screenshots/INC-012/01-profile-not-synced.png)
+After signing out of Client A, I checked the server profile folder (`C:\RProfile$\inc012-roaminguser.V6\Desktop`). Both the original and the updated marker were present. This confirmed that the newest version had reached the file server.
 
-I checked `Win32_UserProfile`: the domain account was signed in, the local profile was loaded, and the roaming path pointed to the expected server share. `Status = 0` did not prove the server copy was current; the missing updated marker demonstrated that the latest changes had not arrived on this client.
+![Both desktop markers available in the server roaming-profile folder](../../screenshots/INC-012/02-server-profile-upload.png)
 
-![Local profile loaded with roaming path configured, despite the missing update](../../screenshots/INC-012/02-profile-investigation.png)
+## Investigation
 
-I checked the outbound firewall rule and tested SMB connectivity with `Test-NetConnection 192.168.146.10 -Port 445`. Ping worked, but the TCP 445 connection failed while the block rule was enabled.
+To reproduce a client-side network issue, I enabled a temporary outbound firewall rule on Client B blocking TCP 445 to `192.168.146.10`. When I signed in using the same domain account, the older desktop marker was present, but `INC012-UpdatedMarker.txt` was missing. Reading it from CMD returned **The system cannot find the file specified**.
 
-![Outbound firewall rule blocking SMB to the profile server](../../screenshots/INC-012/03-smb-blocked.png)
+![Client B signs in but the updated desktop marker is missing](../../screenshots/INC-012/03-client-b-update-missing.png)
+
+I inspected `Win32_UserProfile`. The account had a loaded local profile at `C:\Users\inc012-roaminguser`, with the expected roaming profile path configured. `Status = 0` was not proof of successful synchronization; the file comparison showed the client's profile was out of date.
+
+![Roaming profile configuration and loaded local profile on Client B](../../screenshots/INC-012/04-client-b-profile-details.png)
+
+I checked the outbound firewall rule and tested the server's SMB port using `Test-NetConnection 192.168.146.10 -Port 445`. Ping succeeded, but `TcpTestSucceeded` was `False`. This isolated the problem to SMB access rather than general IP reachability.
+
+![TCP 445 outbound rule enabled, with SMB connection test failing](../../screenshots/INC-012/05-smb-connection-blocked.png)
 
 ## Root cause
 
-A temporary outbound firewall rule on Client B blocked TCP 445 to the roaming-profile server. The workstation could sign in using its existing local profile copy, but it could not retrieve the latest desktop changes from the server. The issue was **SMB connectivity**, not an incorrect user account or a missing server-side file.
+Client B could not retrieve the latest roaming profile files because the temporary outbound firewall rule blocked SMB traffic to the file server. Windows used the existing local profile copy, which did not contain the updated marker.
 
 ## Resolution and verification
 
-I signed out of the affected account, disabled `INC012-Lab-Block-SMB` on Client B, and tested the connection again. TCP 445 was reachable (`TcpTestSucceeded : True`). I did not change the server share, NTFS permissions, or the roaming-profile GPO.
+I signed out of the affected user account while SMB was still blocked, signed in as local `LabAdmin`, disabled `INC012-Lab-Block-SMB`, and repeated the connectivity test. TCP 445 was reachable again (`TcpTestSucceeded : True`). No roaming-profile GPO, share, or NTFS permissions were changed.
 
-![Firewall rule disabled and SMB connectivity restored](../../screenshots/INC-012/04-smb-restored.png)
+![Firewall rule disabled and TCP 445 connectivity restored](../../screenshots/INC-012/06-smb-connection-restored.png)
 
-After signing back in as `HAPPYSYSTEM\INC012-RoamingUser`, Client B showed both desktop markers. I opened the updated file and confirmed its content matched the version uploaded from Client A: `INC012 Updated Profile From Client A`.
+After signing back in as `HAPPYSYSTEM\INC012-RoamingUser`, Client B showed both desktop markers. CMD and Notepad confirmed that the updated file contained the exact text uploaded from Client A.
 
-![Client B shows both markers and reads the updated file successfully](../../screenshots/INC-012/05-profile-sync-verified.png)
+![Client B reads the latest desktop marker after SMB access is restored](../../screenshots/INC-012/07-profile-sync-verified.png)
 
-**Outcome:** The latest desktop file became available on Client B once SMB access was restored and the roaming profile was loaded again. This case highlighted why a successful ping or domain sign-in does not necessarily mean the profile file share is accessible.
+**Outcome:** The second workstation received the latest desktop changes once SMB connectivity was restored. This test showed why a successful ping and domain sign-in do not, by themselves, confirm access to a roaming-profile file share.
