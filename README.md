@@ -18,6 +18,8 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-008](incidents/INC-008-read-only-share-write-denied/README.md) | Can Read Shared Files but Cannot Create Them | AD Groups, SMB Share Permissions, NTFS ACLs | **Verified** |
 | [INC-009](incidents/INC-009-mapped-drive-missing/README.md) | Mapped Network Drive Missing After Sign-in | Group Policy scope, OU placement, Drive Maps, gpresult | Verified |
 | [INC-010](incidents/INC-010-gpo-department-scope/README.md) | Desktop GPO Applies to IT but Not HR | Group Policy links, OU scope, gpresult | Verified |
+| [INC-011](incidents/INC-011-software-deployment-gpo-scope/README.md) | Assigned Software Not Installing Through GPO | Computer OU scope, GPO Software Installation, MSI, gpresult | **Verified** |
+
 
 Each case includes the actual commands and screenshots from the lab. I'll add new cases as I finish and verify them.
 
