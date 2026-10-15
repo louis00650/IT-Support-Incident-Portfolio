@@ -27,7 +27,7 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-017](incidents/INC-017-rdp-disabled-firewall-blocked/README.md) | Remote Desktop Connection Failure: RDP Disabled and Firewall Blocked | Windows RDP, TCP 3389, Test-NetConnection, Firewall scope and rules, Remote Desktop Services | Resolved |
 | [INC-018](incidents/INC-018-print-spooler-service-stopped/README.md) | Printing Fails When Print Spooler Stops | Windows 11, Print Spooler, services.msc, Get-Service, RPC service check, Microsoft Print to PDF | Resolved |
 | [INC-019](incidents/INC-019-incorrect-printer-port/README.md) | Printing Fails Due to Incorrect Printer Port | Windows 11, Microsoft Print to PDF, LPT1, PORTPROMPT, Get-Printer, Print Queue | Resolved |
-
+| [INC-020](incidents/INC-020-business-application-service-failure/README.md) | Internal Business Portal Unavailable After IIS Service Stops | Windows 11, IIS, W3SVC, WAS, Get-Service, Event Viewer, HTTP Port 80 | Resolved |
 
 
 Each case includes the actual commands and screenshots from the lab. I'll add new cases as I finish and verify them.
