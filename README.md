@@ -21,6 +21,7 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-011](incidents/INC-011-software-deployment-gpo-scope/README.md) | Assigned Software Not Installing Through GPO | Computer OU scope, GPO Software Installation, MSI, gpresult | **Verified** |
 | [INC-012](incidents/INC-012-roaming-profile-sync-failure/README.md) | Roaming Profile Not Updated on a Second Workstation | Roaming profiles, SMB connectivity, Windows Firewall, cached profile, cross-client verification | **Verified** |
 | [INC-013](incidents/INC-013-incorrect-dns-ad-discovery/README.md) | Incorrect DNS Server Prevents AD Service Discovery | DNS configuration, SRV record lookup, IP connectivity, DC discovery, PowerShell diagnostics | Resolved |
+| [INC-014](incidents/INC-014-incorrect-hosts-file-resolution/README.md) | Incorrect Hosts File Entry Causes Wrong Hostname Resolution | Windows hosts file, DNS name resolution, Resolve-DnsName, SMB troubleshooting | Resolved |
 
 Each case includes the actual commands and screenshots from the lab. I'll add new cases as I finish and verify them.
 
