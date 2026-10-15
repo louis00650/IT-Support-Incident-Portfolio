@@ -24,6 +24,7 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-014](incidents/INC-014-incorrect-hosts-file-resolution/README.md) | Incorrect Hosts File Entry Causes Wrong Hostname Resolution | Windows hosts file, DNS name resolution, Resolve-DnsName, SMB troubleshooting | Resolved |
 | [INC-015](incidents/INC-015-apipa-dhcp-lease-failure/README.md) | Client Receives an APIPA Address After DHCP Failure | DHCP, APIPA, ipconfig, VMware host-only networking, IPv4 troubleshooting | Resolved |
 | [INC-016](incidents/INC-016-duplicate-ip-address-conflict/README.md) | Duplicate Static IP Address Causes Network Connectivity Failure | IPv4 conflict detection, Get-NetIPAddress, AddressState, APIPA, DHCP recovery | Resolved |
+| [INC-017](incidents/INC-017-rdp-disabled-firewall-blocked/README.md) | Remote Desktop Connection Failure: RDP Disabled and Firewall Blocked | Windows RDP, TCP 3389, Test-NetConnection, Firewall scope and rules, Remote Desktop Services | Resolved |
 
 
 
