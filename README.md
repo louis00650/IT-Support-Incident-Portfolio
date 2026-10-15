@@ -26,7 +26,7 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-016](incidents/INC-016-duplicate-ip-address-conflict/README.md) | Duplicate Static IP Address Causes Network Connectivity Failure | IPv4 conflict detection, Get-NetIPAddress, AddressState, APIPA, DHCP recovery | Resolved |
 | [INC-017](incidents/INC-017-rdp-disabled-firewall-blocked/README.md) | Remote Desktop Connection Failure: RDP Disabled and Firewall Blocked | Windows RDP, TCP 3389, Test-NetConnection, Firewall scope and rules, Remote Desktop Services | Resolved |
 | [INC-018](incidents/INC-018-print-spooler-service-stopped/README.md) | Printing Fails When Print Spooler Stops | Windows 11, Print Spooler, services.msc, Get-Service, RPC service check, Microsoft Print to PDF | Resolved |
-
+| [INC-019](incidents/INC-019-incorrect-printer-port/README.md) | Printing Fails Due to Incorrect Printer Port | Windows 11, Microsoft Print to PDF, LPT1, PORTPROMPT, Get-Printer, Print Queue | Resolved |
 
 
 
