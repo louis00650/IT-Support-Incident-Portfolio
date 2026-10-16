@@ -29,6 +29,11 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-019](incidents/INC-019-incorrect-printer-port/README.md) | Printing Fails Due to Incorrect Printer Port | Windows 11, Microsoft Print to PDF, LPT1, PORTPROMPT, Get-Printer, Print Queue | Resolved |
 | [INC-020](incidents/INC-020-business-application-service-failure/README.md) | Internal Business Portal Unavailable After IIS Service Stops | Windows 11, IIS, W3SVC, WAS, Get-Service, Event Viewer, HTTP Port 80 | Resolved |
 | [INC-021](incidents/INC-021-windows-update-download-connectivity/README.md) | Windows Update Downloads Blocked by Isolated VM Networking | VMware Host-only/NAT, Windows Update, DNS, Default Route, Test-NetConnection, nltest | Resolved |
+| [INC-022](incidents/INC-022-low-disk-space-deployment/README.md) | Low disk space blocks simulated deployment | Windows Client / Storage | Resolved |
+
+
+
+
 
 Each case includes the actual commands and screenshots from the lab. I'll add new cases as I finish and verify them.
 
