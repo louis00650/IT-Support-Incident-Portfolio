@@ -30,7 +30,7 @@ The lab runs Windows Server 2025 (Active Directory and DNS) and a domain-joined 
 | [INC-020](incidents/INC-020-business-application-service-failure/README.md) | Internal Business Portal Unavailable After IIS Service Stops | Windows 11, IIS, W3SVC, WAS, Get-Service, Event Viewer, HTTP Port 80 | Resolved |
 | [INC-021](incidents/INC-021-windows-update-download-connectivity/README.md) | Windows Update Downloads Blocked by Isolated VM Networking | VMware Host-only/NAT, Windows Update, DNS, Default Route, Test-NetConnection, nltest | Resolved |
 | [INC-022](incidents/INC-022-low-disk-space-deployment/README.md) | Low disk space blocks simulated deployment | Windows Client / Storage | Resolved |
-| INC-023 | [Software Installed but User Cannot Launch It](incidents/INC-023-software-launch-ntfs-permissions/README.md) | AD Groups / NTFS Permissions / Application Launch | Verified |
+| [INC-023](incidents/INC-023-software-launch-ntfs-permissions/README.md)| Software Installed but User Cannot Launch It | AD Groups / NTFS Permissions / Application Launch | Verified |
 
 
 
